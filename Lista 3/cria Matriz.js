@@ -6,7 +6,7 @@ const boss = () => {
   console.log(criarMatriz(lin,col))
   console.log(criarMatriz(lin,col).length)
 }
-let lin = 3,col = 5;
+let lin = 5,col = 5;
 console.log(criarMatriz(lin,col))
 console.log(criarMatriz(lin,col).length)
 // boss()
