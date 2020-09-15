@@ -3,14 +3,15 @@ function boss(){
   cadastra(matriz, nomes)
   consultaMedia(matriz, nomes)
   mediaProva(matriz)
-  maiorNota(matriz)
+  maiorNota(matriz, nomes)
   console.log(matriz)
 }
 
 const cadastra = (matriz, nomes) =>{
   for(let i=0;i<3;i++){
     nomes.push({nome:prompt('Digite o nome do aluno:'), //adicionando nome e RG para cada aluno
-    rg:prompt('Digite o numero do RG:')
+    rg:prompt('Digite o numero do RG:'),
+    media:0
     })
     matriz.push([])
     for(let j=0; j<4;j++){ //itera apenas os valores das provas
@@ -23,12 +24,12 @@ const cadastra = (matriz, nomes) =>{
 const consultaMedia = (matriz, nomes) =>{
   let mediaTotal = 0
   for(let i=0;i<3;i++){
-    let media=0;
-    for(let j=0; j<4;j++){
-      media+=matriz[i][j] 
+    for(let j=0; j<4;j++){ 
+      nomes[i].media+=matriz[i][j]
     }
-    mediaTotal += media/4
-    console.log(`Média do Aluno ${nomes[i].nome}: ${media/4}`)
+    nomes[i].media/=4
+    mediaTotal += nomes[i].media/4
+    console.log(`Média do Aluno ${nomes[i].nome}: ${nomes[i].media}`)
   }
   console.log(`Média total da turma: ${mediaTotal/3}`)
 }
@@ -43,14 +44,16 @@ const mediaProva = matriz =>{ // busca pelas colunas e não pelas linhas
   }
 }
 
-const maiorNota = matriz => { // busca pelas colunas
+const maiorNota = (matriz, nomes) => { // busca pelas colunas
   for(let j=0; j<4;j++){
-    let maior=0;
+    let maior=0, nome;
     for(let i=0;i<3;i++){
-      if(matriz[i][j]>maior)
-        maior=matriz[i][j] 
+      if(matriz[i][j]>maior){
+        maior=matriz[i][j]
+        nome = nomes[i].nome
+      }
     }
-    console.log(`Maior nota da Prova ${j+1}: ${maior}`)
+    console.log(`${nome} teve a maior nota da Prova ${j+1}: ${maior}`)
   }
 }
 
