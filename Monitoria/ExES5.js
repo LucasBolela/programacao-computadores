@@ -1,4 +1,4 @@
-function boss(){
+const boss = ()=>{
   let bicicletas = [];
 
   let opcao = Number(prompt(' [1] Adicionar \n [2] Buscar \n [3] Somar \n [4] Marca \n [5] Soma aro \n [6] Mais Velha '))
@@ -36,9 +36,9 @@ function boss(){
   
 }
 
-function adicionar(bicicletas){
+const adicionar= bicicletas =>{
   let codigo = Number(prompt('Digite o código:'));
-  while(bicicletas.some(function (el){return el.codigo==codigo})){
+  while(bicicletas.some( el=>el.codigo==codigo)){
     alert(`Código ${codigo} já cadastrado!`)
     codigo = Number(prompt('Digite outro código:'));
   }
@@ -53,44 +53,38 @@ function adicionar(bicicletas){
   })
 }
 
-function buscar(bicicletas){
+const buscar=(bicicletas)=>{
   let codigo = Number(prompt('Digite o código:'));
-  while(!bicicletas.some(function (el){return el.codigo==codigo})){
+  while(!bicicletas.some(el=> el.codigo==codigo)){
     alert(`Código não ${codigo} já cadastrado!`)
     codigo = Number(prompt('Digite outro código:'));
   };
-  console.log(bicicletas.filter(function (el){
-    if(el.codigo==codigo){
-      return el
-    }
-  }))
+  console.log(bicicletas.filter(el=>el.codigo==codigo))
 }
 
-function soma(bicicletas){
-  let valorTotal = bicicletas.reduce(function (total,el){
-    return total+el.valor
-  },0)
+const soma = bicicletas => {
+  let valorTotal = bicicletas.reduce((total,el) => total+el.valor,0);
   console.log(`Valor total das bicicletas é ${valorTotal}`)
 }
 
-function marca(bicicletas){
+const marca = bicicletas => {
   let marca = prompt('Digite a marca:');
-  bicicletas.forEach(function (el){
+  bicicletas.forEach(el => {
     if(marca == el.marca){
       console.log(el)
     }
   })
 }
 
-function aroMais3(bicicletas){
-  console.log(bicicletas.forEach(function (el,i){
+const aroMais3 = bicicletas => {
+  console.log(bicicletas.forEach((el,i)=>{
     bicicletas[i].aro += 3
   }))
 }
 
-function maisVelha(bicicletas){
+const maisVelha = bicicletas =>{
   let velha = bicicletas[0], anoVelho = bicicletas[0].ano;
-  bicicletas.forEach(function (el){
+  bicicletas.forEach(el => {
     if(anoVelho>el.ano){
       velha = el;
       anoVelho = el.ano
