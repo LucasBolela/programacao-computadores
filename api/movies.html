@@ -7,20 +7,22 @@
   <title>API</title>
   <script>
     function consomeAPI() {
-      let cep = Number(document.querySelector('#cep').value),
+      let name = document.querySelector('#name').value,
       req = new XMLHttpRequest(),
       res;
-      req.open('GET', `https://viacep.com.br/ws/${cep}/json`, true);
+      req.open('GET', `http://www.omdbapi.com/?t=${name}&apikey=b371d4c9`, true);
+      // req.open('GET', `http://www.omdbapi.com/?t=The%20Avengers&apikey=b371d4c9`, true);
       req.send()     
       req.onload = () => {
         console.log('entrou')
         if((req.readyState == 4 )&& (req.status ==200)){
           res = JSON.parse(req.responseText)
 
-          document.querySelector('#logradouro').innerHTML = res.logradouro
-          document.querySelector('#bairro').innerHTML = res.bairro
-          document.querySelector('#localidade').innerHTML = res.localidade
-          document.querySelector('#UF').innerHTML = res.uf
+          document.querySelector('#title').innerHTML = res.Title
+          document.querySelector('#actors').innerHTML = res.Actors
+          document.querySelector('#production').innerHTML = res.Production
+          document.querySelector('#awards').innerHTML = res.Awards
+          document.querySelector('#images').src = res.Poster
 
         } else{
           console.log(`Requisição sem resposta`)
@@ -34,24 +36,28 @@
 
     <form action="GET">
       <div class="form-group">
-        <label>CEP</label>
-        <input type="number" class="form-control" id="cep">
+        <label>Nome</label>
+        <input type="text" class="form-control" id="name">
       </div>
       <div class="form-group">
         <button type="button" onClick="consomeAPI()" class="btn btn-primary">Consome Api</button>
       </div>
       <div class="form-group">
-        Logradouro: <label for="" id="logradouro"></label>
+        Título: <label for="" id="title"></label>
       </div>
       <div class="form-group">
-        Bairro: <label for="" id="bairro"></label>
+        Atores: <label for="" id="actors"></label>
       </div>
       <div class="form-group">
-        Localidade: <label for="" id="localidade"></label>
+        Produção: <label for="" id="production"></label>
       </div>
       <div class="form-group">
-        UF: <label for="" id="UF"></label>
+        Prêmios: <label for="" id="awards"></label>
       </div>
+      <div class="form-group">
+        <img id="images" src=""/>
+      </div>
+      
     </form>
   </div>
   
