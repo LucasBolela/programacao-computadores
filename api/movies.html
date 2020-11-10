@@ -12,7 +12,7 @@
       res;
       req.open('GET', `http://www.omdbapi.com/?t=${name}&apikey=b371d4c9`, true);
       // req.open('GET', `http://www.omdbapi.com/?t=The%20Avengers&apikey=b371d4c9`, true);
-      req.send()     
+      req.send()
       req.onload = () => {
         console.log('entrou')
         if((req.readyState == 4 )&& (req.status ==200)){

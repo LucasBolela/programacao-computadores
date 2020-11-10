@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+  <title>Filmes</title>
+  <script>
+    function search(){
+      let req = new XMLHttpRequest(),
+      res, name = document.querySelector('#name').value;
+      req.open('GET', `http://www.omdbapi.com/?t=${name}&apikey=b371d4c9`, true);
+      req.send();
+      req.onload = () => {
+        if((req.readyState == 4 ) && (req.status == 200)){
+          res = JSON.parse(req.responseText)
+
+          document.querySelector('#title').innerHTML = res.Title
+          document.querySelector('#actors').innerHTML = res.Actors
+          document.querySelector('#production').innerHTML = res.Production
+          document.querySelector('#awards').innerHTML = res.Awards
+          document.querySelector('#poster').src = res.Poster
+        } else{
+          alert('Erro')
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <form action="">
+      <div class="form-group">
+        <!-- <label>Nome</label> -->
+        <input type="text" class="form-control" id="name" placeholder="Nome do Filme" style="margin-top: 15px;">
+      </div>
+      <div class="form-group">
+        <button type="button"  class="btn btn-primary" onClick="search()">Procurar</button>
+      </div>
+    </form>
+    
+    <div class="form-gruop">
+      Título: <h3 for="" id="title"></h3>
+      Atores: <h3 for="" id="actors"></h3>
+      Produção: <h3 for="" id="production"></h3>
+      Prêmios: <h3 for="" id="awards"></h3>
+      <img id="poster" src=""/>
+      
+    </div>
+    
+  </div>
+</body>
+</html>
